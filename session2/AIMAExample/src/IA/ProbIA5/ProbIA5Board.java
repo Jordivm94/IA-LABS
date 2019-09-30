@@ -31,18 +31,43 @@ public class ProbIA5Board {
     /* vvvvv TO COMPLETE vvvvv */
     public void flip_it(int i){
         // flip the coins i and i + 1
+        int aux = board[i];
+        if (i == 4) {
+            board[i] = board[0];
+            board[0] = aux;
+        }
+        else {
+            board[i] = board[i + 1];
+            board[i + 1] = aux;
+        }
+
     }
 
     /* Heuristic function */
     public double heuristic(){
+        double d = 0;
+        for (int i = 0; i < board.length();i++){
+            if (board[i] != solution[i]) ++d;
+        }
         // compute the number of coins out of place respect to solution
-        return 0;
+        return d;
     }
 
      /* Goal test */
      public boolean is_goal(){
          // compute if board = solution
-         return false;
+         for (int i = 0; i < board.length();i++){
+             if (board[i] != solution[i]) return false;
+         }
+         return true;
+     }
+
+     public int[] copia_estado (int[] estado ){
+         int[] copia = new int[estado.length];
+         for (int i = 0; i < board.length();i++){
+             copia[i] = estado[i];
+         }
+         return copia;
      }
 
      /* auxiliary functions */
